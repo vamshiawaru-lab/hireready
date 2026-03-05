@@ -1,0 +1,185 @@
+import { jsPDF } from "jspdf";
+import type { Finding } from "./schema";
+
+function severityLabel(s: number): string {
+  return ["", "Cosmetic", "Minor", "Moderate", "Major", "Critical"][s] || "Unknown";
+}
+
+function severityColorRGB(s: number): [number, number, number] {
+  switch (s) {
+    case 1:
+      return [59, 130, 246];
+    case 2:
+      return [245, 158, 11];
+    case 3:
+      return [249, 115, 22];
+    case 4:
+      return [239, 68, 68];
+    case 5:
+      return [153, 27, 27];
+    default:
+      return [107, 114, 128];
+  }
+}
+
+export async function generatePDF(
+  annotatedImageDataUrl: string,
+  findings: Finding[],
+  summary: string,
+  overallScore: number,
+  filename: string
+): Promise<void> {
+  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margin = 15;
+  const contentWidth = pageWidth - margin * 2;
+  let y = margin;
+
+  // Title
+  pdf.setFontSize(22);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("UI/UX Analysis Report", margin, y + 8);
+  y += 15;
+
+  // Score and summary
+  pdf.setFontSize(11);
+  pdf.setFont("helvetica", "normal");
+  pdf.setTextColor(100);
+  pdf.text(`Overall Score: ${overallScore}/100  |  Issues Found: ${findings.length}`, margin, y);
+  y += 8;
+
+  const summaryLines = pdf.splitTextToSize(summary, contentWidth);
+  pdf.setTextColor(60);
+  pdf.text(summaryLines, margin, y);
+  y += summaryLines.length * 5 + 5;
+
+  // Annotated screenshot
+  if (y + 10 > pageHeight - margin) {
+    pdf.addPage();
+    y = margin;
+  }
+
+  pdf.setFontSize(14);
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor(0);
+  pdf.text("Annotated Screenshot", margin, y);
+  y += 8;
+
+  try {
+    // Calculate image dimensions to fit page width
+    const imgProps = pdf.getImageProperties(annotatedImageDataUrl);
+    const imgRatio = imgProps.height / imgProps.width;
+    const imgWidth = Math.min(contentWidth, 170);
+    const imgHeight = imgWidth * imgRatio;
+    const maxImgHeight = pageHeight - y - margin - 10;
+
+    if (imgHeight > maxImgHeight) {
+      const scaledWidth = maxImgHeight / imgRatio;
+      pdf.addImage(annotatedImageDataUrl, "PNG", margin, y, scaledWidth, maxImgHeight);
+      y += maxImgHeight + 8;
+    } else {
+      pdf.addImage(annotatedImageDataUrl, "PNG", margin, y, imgWidth, imgHeight);
+      y += imgHeight + 8;
+    }
+  } catch {
+    pdf.setFontSize(10);
+    pdf.text("[Screenshot could not be embedded]", margin, y);
+    y += 8;
+  }
+
+  // Findings
+  pdf.addPage();
+  y = margin;
+
+  pdf.setFontSize(16);
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor(0);
+  pdf.text("Findings", margin, y);
+  y += 10;
+
+  findings.forEach((f) => {
+    // Check if we need a new page
+    if (y > pageHeight - 60) {
+      pdf.addPage();
+      y = margin;
+    }
+
+    // Marker number + title
+    const color = severityColorRGB(f.severity);
+    pdf.setFillColor(color[0], color[1], color[2]);
+    pdf.circle(margin + 4, y - 1, 4, "F");
+    pdf.setTextColor(255);
+    pdf.setFontSize(9);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(String(f.marker_number), margin + 4, y, { align: "center" });
+
+    pdf.setTextColor(0);
+    pdf.setFontSize(12);
+    pdf.setFont("helvetica", "bold");
+    pdf.text(f.title, margin + 12, y);
+    y += 5;
+
+    // Severity + confidence
+    pdf.setFontSize(9);
+    pdf.setFont("helvetica", "normal");
+    pdf.setTextColor(color[0], color[1], color[2]);
+    pdf.text(
+      `Severity: ${severityLabel(f.severity)} (${f.severity}/5)  |  Confidence: ${f.confidence}`,
+      margin + 12,
+      y
+    );
+    y += 5;
+
+    // Issue
+    pdf.setTextColor(40);
+    pdf.setFontSize(10);
+    const issueLines = pdf.splitTextToSize(`Issue: ${f.issue}`, contentWidth - 14);
+    pdf.text(issueLines, margin + 12, y);
+    y += issueLines.length * 4.5 + 2;
+
+    // Principle
+    const principleLines = pdf.splitTextToSize(`Principle: ${f.principle}`, contentWidth - 14);
+    pdf.text(principleLines, margin + 12, y);
+    y += principleLines.length * 4.5 + 2;
+
+    // Solution
+    pdf.setFont("helvetica", "bold");
+    const solutionLines = pdf.splitTextToSize(`Solution: ${f.solution}`, contentWidth - 14);
+    pdf.setFont("helvetica", "normal");
+    pdf.text(solutionLines, margin + 12, y);
+    y += solutionLines.length * 4.5 + 2;
+
+    // KPIs
+    pdf.setFontSize(9);
+    pdf.setTextColor(80);
+    pdf.text(`User KPIs: ${f.user_kpis.join(", ")}`, margin + 12, y);
+    y += 4;
+    pdf.text(`Business KPIs: ${f.business_kpis.join(", ")}`, margin + 12, y);
+    y += 4;
+
+    // Tags
+    pdf.text(`Tags: ${f.category_tags.join(", ")}`, margin + 12, y);
+    y += 8;
+
+    // Separator
+    pdf.setDrawColor(220);
+    pdf.line(margin, y, pageWidth - margin, y);
+    y += 6;
+  });
+
+  // Footer
+  if (y > pageHeight - 20) {
+    pdf.addPage();
+    y = margin;
+  }
+  pdf.setFontSize(8);
+  pdf.setTextColor(150);
+  pdf.text(
+    `Generated by ScreenLens  |  ${new Date().toLocaleDateString()}`,
+    margin,
+    pageHeight - 10
+  );
+
+  pdf.save(filename.replace(/\.[^.]+$/, "") + "-report.pdf");
+}
