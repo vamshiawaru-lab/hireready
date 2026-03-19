@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import PasswordGate from "@/components/PasswordGate";
+import { ClientProviders } from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ScreenLens — AI UI/UX Analyzer",
-  description: "Upload a UI screenshot and get expert UX analysis with annotated markers, severity ratings, and actionable fixes.",
+  title: "HireReady - Community Polls",
+  description: "Community poll feature prototype",
 };
 
 export default function RootLayout({
@@ -20,8 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} font-sans antialiased`}>
-        <PasswordGate>{children}</PasswordGate>
+      <body className={`${inter.variable} ${inter.className} antialiased`}>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
