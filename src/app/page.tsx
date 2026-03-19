@@ -1,103 +1,59 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { usePoll } from "@/context/PollContext";
+import { PageShell } from "@/components/layout/PageShell";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { PollCard } from "@/components/poll/PollCard";
+import Link from "next/link";
+
+export default function FeedPage() {
+  const { polls, hasUserVoted } = usePoll();
+
+  const pinnedPoll = polls.find((p) => p.isPinned && p.status === "active");
+  const feedPolls = polls.filter((p) => !p.isPinned);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <PageShell sidebar={<Sidebar />}>
+      {/* Pinned Poll Hero — always visible when a pinned poll exists */}
+      {pinnedPoll && (
+        <section className="bg-white rounded-2xl border border-[#ebebeb] p-4 md:p-6 mb-6 animate-fade-in-down">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-bold text-[#2d1bd3] uppercase tracking-wider">
+              Personalized for you
+            </span>
+            <Link href="/" className="text-sm text-[#2d1bd3] hover:underline font-medium transition-colors duration-[150ms]">
+              View all polls &rarr;
+            </Link>
+          </div>
+          <h2 className="text-lg font-bold text-[#171717] mb-1">
+            Polls Needing Your Vote
+          </h2>
+          <p className="text-sm text-[#5c5c5c] mb-4">
+            Open community polls you can answer in one click
+          </p>
+          <PollCard poll={pinnedPoll} />
+        </section>
+      )}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Feed */}
+      <section className="animate-fade-in-up" style={{ animationDelay: "150ms" }}>
+        <div className="flex items-center gap-4 mb-4">
+          <h2 className="text-lg font-bold text-[#171717]">Recent Content</h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="flex gap-4 mb-4 border-b border-[#ebebeb]">
+          <button className="text-sm font-medium text-[#2d1bd3] border-b-2 border-[#2d1bd3] pb-2 px-1 transition-colors duration-[200ms]">
+            Most Recent
+          </button>
+          <button className="text-sm font-medium text-[#5c5c5c] pb-2 px-1 hover:text-[#171717] transition-colors duration-[200ms]">
+            Most Viewed
+          </button>
+        </div>
+        <div className="space-y-4">
+          {feedPolls.map((poll, i) => (
+            <PollCard key={poll.id} poll={poll} index={i} />
+          ))}
+        </div>
+      </section>
+    </PageShell>
   );
 }
