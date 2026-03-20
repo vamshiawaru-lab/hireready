@@ -287,12 +287,12 @@ export default function CreatePostPage() {
                         {/* Add image / image status button */}
                         <button
                           onClick={() => toggleImagePanel(i)}
-                          className={`flex items-center gap-1 px-3 py-[10px] text-[11px] font-medium leading-[16.5px] transition-colors whitespace-nowrap border rounded-md mr-2 ${
+                          className={`flex items-center gap-1 px-3 py-[10px] text-[11px] font-medium leading-[16.5px] transition-colors whitespace-nowrap mr-2 ${
                             expandedImageOption === i
-                              ? "border-[#335cff] text-[#335cff] bg-[rgba(51,92,255,0.05)]"
+                              ? "text-[#335cff]"
                               : opt.imageUrl
-                              ? "border-[#335cff]/30 text-[#335cff] bg-[rgba(51,92,255,0.03)]"
-                              : "border-[#ebebeb] text-[#5c5c5c] hover:text-[#335cff] hover:border-[#335cff]/50"
+                              ? "text-[#335cff]"
+                              : "text-[#5c5c5c] hover:text-[#335cff]"
                           }`}
                         >
                           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.2">
