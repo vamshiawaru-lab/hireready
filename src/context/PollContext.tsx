@@ -207,6 +207,7 @@ export function PollProvider({ children }: { children: ReactNode }) {
       const poll: Poll = {
         id,
         type: data.type,
+        title: data.title,
         question: data.question,
         description: data.description,
         options: data.options.map((opt, i) => ({

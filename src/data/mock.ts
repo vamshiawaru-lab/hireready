@@ -48,6 +48,7 @@ export const MOCK_POLLS: Poll[] = [
   {
     id: "poll-1",
     type: "text",
+    title: "Traffic - Community Analytics Spike from Nov 11",
     question: "What's your go-to trail running shoe brand for technical terrain?",
     description:
       "Is anyone else seeing a major spike in Community Traffic—Page Views, Visits, and Unique Visitors from Nov 11 to Nov 13 and going on..? This seems to have started after the 25.10 release. I'm curious ...",
@@ -77,6 +78,7 @@ export const MOCK_POLLS: Poll[] = [
   {
     id: "poll-2",
     type: "text",
+    title: "Design System Decision for New Projects",
     question: "Which design system approach do you prefer for new projects?",
     description:
       "Trying to decide the best path forward for our team's next project.",
@@ -105,9 +107,10 @@ export const MOCK_POLLS: Poll[] = [
   {
     id: "poll-3",
     type: "image",
-    question: "What's your go-to trail running shoe brand for technical terrain?",
+    title: "Visual Style Poll — Community Theme",
+    question: "Which visual style do you prefer for the community theme?",
     description:
-      "Is anyone else seeing a major spike in Community Traffic—Page Views, Visits, and Unique Visitors from Nov 11 to Nov 13 and going on..? This seems to have started after the 25.10 release. I'm curious ...",
+      "We're exploring different visual directions for the community redesign. Vote for your favorite!",
     options: [
       {
         id: "opt-3a",
@@ -141,6 +144,7 @@ export const MOCK_POLLS: Poll[] = [
   {
     id: "poll-4",
     type: "image",
+    title: "Homepage Redesign — Q1 Update",
     question: "Which homepage design direction do you prefer for the Q1 update?",
     description: "We're exploring three visual directions for the homepage redesign.",
     options: [
@@ -182,6 +186,7 @@ export const MOCK_POLLS: Poll[] = [
   {
     id: "poll-5",
     type: "text",
+    title: "CMAD Resources You Can Use",
     question: "Which feature would most improve your community management workflow?",
     description: "Help us prioritize the next quarter's roadmap.",
     options: [

@@ -42,9 +42,9 @@ export function PollCard({ poll, index = 0 }: PollCardProps) {
       className="bg-white rounded-2xl border border-[#ebebeb] p-4 md:p-6 space-y-4 animate-fade-in-up"
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      {/* Question & description */}
+      {/* Post title & description */}
       <div>
-        <h3 className="text-base font-semibold text-[#171717] leading-[27px]">{poll.question}</h3>
+        <h3 className="text-base font-semibold text-[#171717] leading-[27px]">{poll.title}</h3>
         {poll.description && (
           <p className="mt-1 text-sm text-[#5c5c5c] leading-[21px] line-clamp-2">{poll.description}</p>
         )}
@@ -52,6 +52,9 @@ export function PollCard({ poll, index = 0 }: PollCardProps) {
           5 min read
         </span>
       </div>
+
+      {/* Poll question */}
+      <p className="text-[14px] font-medium text-[#171717] leading-[21px]">{poll.question}</p>
 
       {/* Options or Results */}
       {poll.type === "text" ? (

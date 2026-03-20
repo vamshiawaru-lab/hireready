@@ -70,6 +70,7 @@ export function CreatePollForm() {
 
     createPoll({
       type,
+      title: question.trim(),
       question: question.trim(),
       description: description.trim(),
       options: options

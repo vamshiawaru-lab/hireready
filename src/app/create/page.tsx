@@ -167,8 +167,9 @@ export default function CreatePostPage() {
       const days = parseInt(durationValue) || 7;
       createPoll({
         type: hasImages ? "image" : "text",
+        title: title || pollQuestion,
         question: pollQuestion,
-        description: description || title,
+        description: description,
         options: validOptions.map((o) => ({
           label: o.label,
           ...(o.imageUrl ? { imageUrl: o.imageUrl } : {}),

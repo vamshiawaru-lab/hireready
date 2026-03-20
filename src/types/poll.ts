@@ -40,6 +40,7 @@ export function isImageOption(option: PollOption): option is ImageOption {
 export interface Poll {
   id: string;
   type: PollType;
+  title: string;
   question: string;
   description: string;
   options: PollOption[];
@@ -99,6 +100,7 @@ export interface PollAnalytics {
 
 export interface CreatePollFormData {
   type: PollType;
+  title: string;
   question: string;
   description: string;
   options: { label: string; imageUrl?: string }[];
