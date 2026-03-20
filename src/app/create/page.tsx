@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { usePoll } from "@/context/PollContext";
 import { MOCK_BOARDS } from "@/data/mock";
 import type { PollSettings } from "@/types/poll";
+import RichTextEditor from "@/components/create/RichTextEditor";
 
 const STYLE_OPTIONS = ["Photorealistic", "Illustration", "Flat Vector", "3D Render", "Minimal"];
 const ASPECT_RATIOS = ["1:1", "4:3", "16:9"];
@@ -209,14 +210,12 @@ export default function CreatePostPage() {
               />
             </div>
 
-            {/* Description */}
+            {/* Description — Rich Text Editor */}
             <div className="flex flex-col gap-2">
               <label className="font-medium text-[14px] leading-[21px] text-[#171717]">Description</label>
-              <textarea
+              <RichTextEditor
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Post Description"
-                className="w-full h-[103px] px-4 py-3 text-[14px] leading-[21px] text-[#171717] placeholder:text-[rgba(23,23,23,0.5)] bg-white border border-[#ebebeb] rounded-xl outline-none resize-none focus:border-[#335cff] focus:ring-1 focus:ring-[#335cff]/20 transition-all duration-150"
+                onChange={(html) => setDescription(html)}
               />
             </div>
           </div>
