@@ -50,7 +50,7 @@ export function ProgressBar({
   return (
     <div
       className={cn(
-        "relative w-full rounded-lg border px-4 py-3 overflow-hidden",
+        "relative w-full rounded-xl border px-4 py-3.5 overflow-hidden",
         "transition-all duration-[300ms] ease-[cubic-bezier(0.25,1,0.5,1)]",
         isSelected ? "border-[#2d1bd3] bg-[#2d1bd3]/5" : "border-[#ebebeb] bg-white",
         className
@@ -58,7 +58,7 @@ export function ProgressBar({
     >
       <div
         className={cn(
-          "absolute inset-y-0 left-0 opacity-15",
+          "absolute inset-y-0 left-0 rounded-xl opacity-[0.12]",
           "transition-[width] duration-[600ms] ease-[cubic-bezier(0.25,1,0.5,1)]",
           color
         )}
@@ -66,13 +66,13 @@ export function ProgressBar({
       />
       <div className="relative flex items-center justify-between">
         <span className={cn(
-          "text-sm font-medium",
+          "text-[14px] font-medium leading-[21px]",
           isSelected ? "text-[#2d1bd3]" : "text-[#171717]"
         )}>
           {label}
         </span>
         {showPercentage && (
-          <span className="text-sm font-semibold text-[#171717] tabular-nums">
+          <span className="text-[14px] font-semibold text-[#171717] tabular-nums leading-[21px]">
             {displayPercentage}%
           </span>
         )}

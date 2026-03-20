@@ -208,13 +208,11 @@ export const MOCK_POLLS: Poll[] = [
   },
 ];
 
-// Pre-seed votes: Bob voted on poll-1 and poll-2. Alice voted on poll-3.
+// Pre-seed votes from OTHER users only — Bob (default user) starts fresh with no votes
 export const MOCK_VOTES: Vote[] = [
-  { pollId: "poll-1", optionId: "opt-1a", userId: "user-bob", votedAt: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-1", optionId: "opt-1a", userId: "user-carol", votedAt: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-1", optionId: "opt-1b", userId: "user-dan", votedAt: new Date(now.getTime() - 1.5 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-1", optionId: "opt-1e", userId: "user-eve", votedAt: new Date(now.getTime() - 0.5 * 24 * 60 * 60 * 1000) },
-  { pollId: "poll-2", optionId: "opt-2a", userId: "user-bob", votedAt: new Date(now.getTime() - 0.5 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-2", optionId: "opt-2a", userId: "user-carol", votedAt: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-2", optionId: "opt-2d", userId: "user-dan", votedAt: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-2", optionId: "opt-2d", userId: "user-eve", votedAt: new Date(now.getTime() - 1.5 * 24 * 60 * 60 * 1000) },
@@ -222,7 +220,6 @@ export const MOCK_VOTES: Vote[] = [
   { pollId: "poll-3", optionId: "opt-3a", userId: "user-alice", votedAt: new Date(now.getTime() - 0.5 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-3", optionId: "opt-3b", userId: "user-dan", votedAt: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-3", optionId: "opt-3b", userId: "user-eve", votedAt: new Date(now.getTime() - 0.8 * 24 * 60 * 60 * 1000) },
-  { pollId: "poll-4", optionId: "opt-4b", userId: "user-bob", votedAt: new Date(now.getTime() - 0.3 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-4", optionId: "opt-4a", userId: "user-carol", votedAt: new Date(now.getTime() - 0.5 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-4", optionId: "opt-4b", userId: "user-dan", votedAt: new Date(now.getTime() - 0.7 * 24 * 60 * 60 * 1000) },
   { pollId: "poll-4", optionId: "opt-4c", userId: "user-eve", votedAt: new Date(now.getTime() - 0.2 * 24 * 60 * 60 * 1000) },

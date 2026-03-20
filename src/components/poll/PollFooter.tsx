@@ -34,14 +34,12 @@ export function PollFooter({ poll, voteCount, commentCount, hasVoted, isCreator 
         <button className="text-sm text-[#2d1bd3] font-medium hover:underline transition-colors duration-[150ms]">
           View {commentCount} Comment{commentCount !== 1 ? "s" : ""}
         </button>
-        {hasVoted && isCreator && (
-          <Link
-            href={`/polls/${poll.id}/analytics`}
-            className="text-sm text-[#2d1bd3] font-medium hover:underline transition-colors duration-[150ms]"
-          >
-            View Analytics
-          </Link>
-        )}
+        <Link
+          href={`/polls/${poll.id}/analytics`}
+          className="text-sm text-[#2d1bd3] font-medium hover:underline transition-colors duration-[150ms]"
+        >
+          View Analytics
+        </Link>
       </div>
     </div>
   );
