@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { UserSwitcher } from "@/components/UserSwitcher";
 
@@ -8,8 +9,8 @@ export function TopNav() {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-[#ebebeb]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-[62px] flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-[#171717] transition-opacity duration-[150ms] hover:opacity-80">
-          Khoros <span className="text-[#2d1bd3]">&times;</span>
+        <Link href="/" className="transition-opacity duration-[150ms] hover:opacity-80 flex items-center">
+          <Image src="/khoros-logo.png" alt="Khoros" width={114} height={40} priority />
         </Link>
 
         <div className="flex items-center gap-3">
