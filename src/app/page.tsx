@@ -41,10 +41,10 @@ export default function FeedPage() {
           <h2 className="text-lg font-bold text-[#171717]">Recent Content</h2>
         </div>
         <div className="flex gap-4 mb-4 border-b border-[#ebebeb]">
-          <button className="text-sm font-medium text-[#2d1bd3] border-b-2 border-[#2d1bd3] pb-2 px-1 transition-colors duration-[200ms]">
+          <button className="text-sm font-medium text-[#2d1bd3] border-b-2 border-[#2d1bd3] pb-2 px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 rounded-t transition-colors duration-150">
             Most Recent
           </button>
-          <button className="text-sm font-medium text-[#5c5c5c] pb-2 px-1 hover:text-[#171717] transition-colors duration-[200ms]">
+          <button className="text-sm font-medium text-[#5c5c5c] pb-2 px-1 hover:text-[#171717] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 rounded-t transition-colors duration-150">
             Most Viewed
           </button>
         </div>

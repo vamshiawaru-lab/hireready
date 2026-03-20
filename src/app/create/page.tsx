@@ -189,7 +189,7 @@ export default function CreatePostPage() {
       <div className="w-full max-w-[588px] bg-white rounded-2xl border border-[#ebebeb] shadow-[0px_1px_2px_0px_rgba(10,13,20,0.03)] overflow-hidden animate-fade-in">
         {/* Header — "Create post" */}
         <div className="flex items-center justify-center h-[55px] border-b border-[#ebebeb]">
-          <h1 className="font-medium text-[16px] leading-[21px] text-[#171717]" style={{ fontFamily: "'Inter Display', Inter, sans-serif" }}>
+          <h1 className="font-medium text-[16px] leading-[21px] text-[#171717]">
             Create post
           </h1>
         </div>
@@ -254,7 +254,6 @@ export default function CreatePostPage() {
                     onChange={(e) => setPollQuestion(e.target.value)}
                     placeholder="Ask a question"
                     className="w-full px-3 py-[10px] text-[14px] text-[#171717] placeholder:text-[rgba(23,23,23,0.5)] bg-white border border-[#ebebeb] rounded-md outline-none focus:border-[#335cff] focus:ring-1 focus:ring-[#335cff]/20 transition-all duration-150"
-                    style={{ fontFamily: "'Inter Display', Inter, sans-serif" }}
                   />
 
                   {/* Options */}
@@ -484,7 +483,7 @@ export default function CreatePostPage() {
                   )}
 
                   {/* Board + Duration row */}
-                  <div className="flex gap-2 items-start pt-1 opacity-80">
+                  <div className="flex gap-2 items-start pt-1">
                     {/* Board */}
                     <div className="flex-1 flex flex-col gap-1">
                       <label className="font-medium text-[12px] leading-[1.5] text-[#171717]">Board</label>
@@ -617,20 +616,20 @@ export default function CreatePostPage() {
           {/* Bottom Toolbar */}
           <div className="flex items-center justify-between h-[53px] px-5 pt-[9px] border-t border-[#ebebeb]">
             <div className="flex items-center gap-1">
-              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] transition-colors" title="Photo">
+              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors" title="Photo" aria-label="Photo">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="2.5" y="3.5" width="15" height="13" rx="2" />
                   <circle cx="7" cy="8" r="1.5" />
                   <path d="M17.5 13l-3.5-4-3 3-2-2L2.5 14" />
                 </svg>
               </button>
-              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] transition-colors" title="Video">
+              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors" title="Video" aria-label="Video">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="2" y="4" width="11" height="12" rx="2" />
                   <path d="M13 8.5l5-3v9l-5-3" />
                 </svg>
               </button>
-              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] transition-colors" title="Document">
+              <button className="flex items-center justify-center w-9 h-9 rounded-md text-[#5c5c5c] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors" title="Document" aria-label="Document">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M11 2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7l-5-5z" />
                   <path d="M11 2v5h5" />
@@ -639,12 +638,13 @@ export default function CreatePostPage() {
               </button>
               <button
                 onClick={() => setShowPoll(!showPoll)}
-                className={`flex items-center justify-center w-9 h-9 rounded-md transition-colors ${
+                className={`flex items-center justify-center w-9 h-9 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors ${
                   showPoll
                     ? "bg-[rgba(51,92,255,0.1)] text-[#335cff]"
                     : "text-[#5c5c5c] hover:bg-[#f5f5f5]"
                 }`}
                 title="Poll"
+                aria-label="Poll"
               >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="2.5" y="3.5" width="15" height="3" rx="1.5" />
@@ -657,7 +657,7 @@ export default function CreatePostPage() {
             <button
               onClick={handlePost}
               disabled={!canPost}
-              className={`h-[30px] px-5 text-[12px] font-medium leading-[18px] text-white rounded-md transition-all duration-150 ${
+              className={`h-[30px] px-5 text-[12px] font-medium leading-[18px] text-white rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 focus-visible:ring-offset-1 transition-all duration-150 ${
                 canPost
                   ? "bg-[#335cff] hover:bg-[#2a4de6] active:scale-[0.97] shadow-sm cursor-pointer"
                   : "bg-[#335cff] opacity-40 cursor-not-allowed"

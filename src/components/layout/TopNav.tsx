@@ -24,19 +24,19 @@ export function TopNav() {
           </Link>
 
           {/* Nav icons */}
-          <button className="hidden sm:block p-2 text-[#5c5c5c] hover:text-[#171717] transition-colors duration-[150ms]">
+          <button className="hidden sm:block p-2 rounded-md text-[#5c5c5c] hover:text-[#171717] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors duration-150" aria-label="Search">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="8" cy="8" r="5.5" />
               <path d="M12.5 12.5L16 16" />
             </svg>
           </button>
-          <button className="hidden sm:block p-2 text-[#5c5c5c] hover:text-[#171717] transition-colors duration-[150ms]">
+          <button className="hidden sm:block p-2 rounded-md text-[#5c5c5c] hover:text-[#171717] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors duration-150" aria-label="Messages">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="2" y="4" width="14" height="10" rx="2" />
               <path d="M2 6l7 4 7-4" />
             </svg>
           </button>
-          <button className="p-2 text-[#5c5c5c] hover:text-[#171717] transition-colors duration-[150ms] relative">
+          <button className="p-2 rounded-md text-[#5c5c5c] hover:text-[#171717] hover:bg-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#335cff]/40 transition-colors duration-150 relative" aria-label="Notifications">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M9 2a5.5 5.5 0 0 1 5.5 5.5v2.5l1.5 1.5H2l1.5-1.5V7.5A5.5 5.5 0 0 1 9 2z" />
               <path d="M7.5 15.5a1.5 1.5 0 0 0 3 0" />
